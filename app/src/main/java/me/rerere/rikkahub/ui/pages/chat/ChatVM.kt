@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -54,7 +53,6 @@ class ChatVM(
     private val conversationRepo: ConversationRepository,
     private val chatService: ChatService,
     val updateChecker: UpdateChecker,
-    private val analytics: FirebaseAnalytics,
 ) : ViewModel() {
     private val _conversationId: Uuid = Uuid.parse(id)
     val conversation: StateFlow<Conversation> = chatService.getConversationFlow(_conversationId)
@@ -181,7 +179,6 @@ class ChatVM(
 
     fun handleMessageSend(content: List<UIMessagePart>) {
         if (content.isEmptyInputMessage()) return
-        analytics.logEvent("ai_send_message", null)
 
         val assistant = settings.value.assistants.find { it.id == settings.value.assistantId }
         val processedContent = if (assistant != null) {
@@ -209,7 +206,6 @@ class ChatVM(
 
     fun handleMessageEdit(parts: List<UIMessagePart>, messageId: Uuid) {
         if (parts.isEmptyInputMessage()) return
-        analytics.logEvent("ai_edit_message", null)
 
         val assistant = settings.value.assistants.find { it.id == settings.value.assistantId }
         val processedParts = if (assistant != null) {
@@ -375,7 +371,6 @@ class ChatVM(
         message: UIMessage,
         regenerateAssistantMsg: Boolean = true
     ) {
-        analytics.logEvent("ai_regenerate_at_message", null)
         chatService.regenerateAtMessage(_conversationId, message, regenerateAssistantMsg)
     }
 
