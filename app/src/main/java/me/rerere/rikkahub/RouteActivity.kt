@@ -15,6 +15,9 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.draw.scale
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -169,7 +172,9 @@ class RouteActivity : ComponentActivity() {
                 NavHost(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(MaterialTheme.colorScheme.background),
+                        .background(MaterialTheme.colorScheme.background)
+                        .padding(50.dp)
+                        .scale(0.5f),
                     startDestination = Screen.Chat(
                         id = if (readBooleanPreference("create_new_conversation_on_start", true)) {
                             Uuid.random().toString()
