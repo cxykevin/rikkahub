@@ -173,8 +173,8 @@ class RouteActivity : ComponentActivity() {
                     modifier = Modifier
                         .fillMaxSize()
                         .background(MaterialTheme.colorScheme.background)
-                        .padding(50.dp)
-                        .scale(0.5f),
+                        .padding(80.dp)
+                        .scale(1.0f),
                     startDestination = Screen.Chat(
                         id = if (readBooleanPreference("create_new_conversation_on_start", true)) {
                             Uuid.random().toString()
