@@ -178,6 +178,9 @@ dependencies {
     // DataStore
     implementation(libs.androidx.datastore.preferences)
 
+    // Guava (for caching)
+    implementation(libs.guava)
+
     // Image metadata extractor
     // https://github.com/drewnoakes/metadata-extractor
     implementation(libs.metadata.extractor)
