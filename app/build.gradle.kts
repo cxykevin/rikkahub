@@ -70,8 +70,8 @@ android {
 
     buildTypes {
         release {
-            // 如果没有配置签名，则使用调试签名
-            signingConfig = signingConfigs.findByName("release") ?: signingConfigs.getByName("debug")
+            // 始终使用调试签名以避免签名问题
+            signingConfig = signingConfigs.getByName("debug")
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
